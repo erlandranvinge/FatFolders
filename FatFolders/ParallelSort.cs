@@ -36,10 +36,10 @@ namespace FatFolders
 			{
 				var pivot = Partition(list, left, right, comparer);
 				Parallel.Invoke(new Action[]
-					{
-						() => QuicksortParallel(list, left, pivot - 1, comparer),
-						() => QuicksortParallel(list, pivot + 1, right, comparer)
-					});
+				{
+					() => QuicksortParallel(list, left, pivot - 1, comparer),
+					() => QuicksortParallel(list, pivot + 1, right, comparer)
+				});
 			}
 		}
 

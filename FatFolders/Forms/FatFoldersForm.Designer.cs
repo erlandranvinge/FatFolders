@@ -28,12 +28,13 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FatFoldersForm));
 			this.AddFolderButton = new System.Windows.Forms.Button();
 			this.TotalSizeValueLabel = new System.Windows.Forms.Label();
 			this.TotalSizeLabel = new System.Windows.Forms.Label();
 			this.ClearTopListButton = new System.Windows.Forms.Button();
 			this.TopFatFoldersLabel = new System.Windows.Forms.Label();
-			this.FoldersListView = new FoldersListView();
+			this.FoldersListView = new FatFolders.Forms.FoldersListView();
 			this.PathColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.SizeColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.SuspendLayout();
@@ -115,12 +116,12 @@
 			// PathColumn
 			// 
 			this.PathColumn.Text = "Path";
-			this.PathColumn.Width = 700;
+			this.PathColumn.Width = 699;
 			// 
 			// SizeColumn
 			// 
 			this.SizeColumn.Text = "Size";
-			this.SizeColumn.Width = 80;
+			this.SizeColumn.Width = 88;
 			// 
 			// FatFoldersForm
 			// 
@@ -136,9 +137,9 @@
 			this.Controls.Add(this.ClearTopListButton);
 			this.Controls.Add(this.TopFatFoldersLabel);
 			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MinimumSize = new System.Drawing.Size(400, 200);
 			this.Name = "FatFoldersForm";
-			this.ShowIcon = false;
 			this.Text = "Fat Folders";
 			this.ResumeLayout(false);
 			this.PerformLayout();

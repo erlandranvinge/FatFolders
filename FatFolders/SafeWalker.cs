@@ -7,17 +7,18 @@ namespace FatFolders
 	public static class SafeWalker
 	{
 		private static bool _cancel;
+		private static List<string> _result = new List<string>(); 
 
 		public static List<string> GetFolders(string path)
 		{
+			_result.Clear();
 			_cancel = false;
-			var result = new List<string>();
-			result.Add(path);
-			GetSubFolders(path, ref result);
-			return result;
+			_result.Add(path);
+			GetSubFolders(path);
+			return _result;
 		}
 
-		private static void GetSubFolders(string path, ref List<string> result)
+		private static void GetSubFolders(string path)
 		{
 			try
 			{
@@ -27,8 +28,8 @@ namespace FatFolders
 				{
 					if (_cancel)
 						break;
-					result.Add(subFolder);
-					GetSubFolders(subFolder, ref result);
+					_result.Add(subFolder);
+					GetSubFolders(subFolder);
 				}
 			}
 			catch (UnauthorizedAccessException) {}

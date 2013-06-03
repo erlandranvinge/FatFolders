@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,14 +11,15 @@ namespace FatFolders.Forms
 {
 	public partial class ProcessingDialog : Form
 	{
-		private string _path;
-		private FatFoldersResult _result;
+		private readonly string _path;
+		private readonly FatFoldersResult _result;
 
 		public ProcessingDialog(string path, FatFoldersResult result)
 		{
 			_path = path;
 			_result = result;
 			InitializeComponent();
+			SearchProgressStatusLabel.Text = "Preparing...";
 		}
 
 		private void SearchWorkerDoWork(object sender, DoWorkEventArgs e)
@@ -28,16 +31,17 @@ namespace FatFolders.Forms
 				return;
 
 			SearchWorker.ReportProgress(0, "Enumerating folders...");
-			var folders = SafeWalker.GetFolders(path);
-			SearchWorker.ReportProgress(0, string.Format("Processing folders 0/{0}...", folders.Count));
+			var folders = new ParallelWalk().GetFolders(path);//SafeWalker.GetFolders(path);
 
-			int processed = 0;
-			float total = folders.Count;
-			int statusInterval = folders.Count / 100;
+			SearchWorker.ReportProgress(0, string.Format("Processing folders 0/{0}...", folders.Length));
+
+			var processed = 0;
+			float total = folders.Length;
+			var statusInterval = folders.Length / 100;
 			if (worker.CancellationPending)
 				return;
 
-			Parallel.For(0L, folders.Count, i =>
+			Parallel.For(0L, folders.Length, i =>
 			{
 				if (worker.CancellationPending)
 					return;
@@ -51,7 +55,6 @@ namespace FatFolders.Forms
 				if (statusInterval > 0 && processed % statusInterval == 0)
 					SearchWorker.ReportProgress((int)((processed / total) * 100.0), "Processing folders (" + processed + "/" + total + ")...");
 			});
-
 			SearchWorker.ReportProgress((int)((processed / total) * 100.0), "Sorting folders...");
 			_result.Sort();
 		}
@@ -62,7 +65,7 @@ namespace FatFolders.Forms
 			{
 				var files = Directory.EnumerateFiles(path, "*", SearchOption.TopDirectoryOnly).GetEnumerator();
 				long size = 0;
-				for (; ; )
+				for (;;)
 				{
 					try
 					{
@@ -85,7 +88,7 @@ namespace FatFolders.Forms
 			}
 		}
 
-		private void SearchWorkerProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+		private void SearchWorkerProgressChanged(object sender, ProgressChangedEventArgs e)
 		{
 			SearchProgressBar.Value = e.ProgressPercentage;
 			if (e.UserState is string)
@@ -96,28 +99,25 @@ namespace FatFolders.Forms
 				CancelSearchButton.Enabled = true;
 		}
 
-		private void SearchWorkerRunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+		private void SearchWorkerRunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
 		{
 			SearchProgressStatusLabel.Text = "Ready";
-			SearchProgressBar.Enabled = false;
 			SearchProgressBar.Value = 0;
-			SearchProgressStatusLabel.Enabled = false;
 			CancelSearchButton.Enabled = false;
 			Close();
 		}
 
 		private void CancelSearchButtonClick(object sender, EventArgs e)
 		{
+			SearchProgressStatusLabel.Text = "Canceling...";
 			CancelSearchButton.Enabled = false;
-			SafeWalker.Cancel();
 			SearchWorker.CancelAsync();
 		}
 
-		private void ProcessingDialogVisibleChanged(object sender, EventArgs e)
+		private void ProcessingDialogShown(object sender, EventArgs e)
 		{
 			if (!SearchWorker.IsBusy)
 				SearchWorker.RunWorkerAsync(_path);
-
 		}
 	}
 }

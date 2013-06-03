@@ -51,7 +51,6 @@
 			// 
 			this.SearchProgressStatusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.SearchProgressStatusLabel.Enabled = false;
 			this.SearchProgressStatusLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.SearchProgressStatusLabel.Location = new System.Drawing.Point(12, 55);
 			this.SearchProgressStatusLabel.Name = "SearchProgressStatusLabel";
@@ -64,7 +63,6 @@
 			// 
 			this.SearchProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.SearchProgressBar.Enabled = false;
 			this.SearchProgressBar.Location = new System.Drawing.Point(12, 23);
 			this.SearchProgressBar.Name = "SearchProgressBar";
 			this.SearchProgressBar.Size = new System.Drawing.Size(570, 29);
@@ -95,7 +93,7 @@
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Processing Fat Folders...";
-			this.VisibleChanged += new System.EventHandler(this.ProcessingDialogVisibleChanged);
+			this.Shown += new System.EventHandler(this.ProcessingDialogShown);
 			this.ResumeLayout(false);
 
 		}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace FatFolders
@@ -39,7 +40,15 @@ namespace FatFolders
 
 		public void Sort()
 		{
-			ParallelSort.QuicksortParallel(_folders, (a, b) => b.Size.CompareTo(a.Size));
+			_folders.Sort((a, b) =>
+			{
+				if (a == null)
+					return 1;
+				if (b == null)
+					return -1;
+				return a.Size > b.Size ? -1 : 1;
+			});
+			//ParallelSort.QuicksortParallel(_folders, (a, b) => b.Size.CompareTo(a.Size));
 		}
 
 		public FatFolder this[int index]
