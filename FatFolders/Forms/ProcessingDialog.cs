@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -82,7 +80,7 @@ namespace FatFolders.Forms
 				}
 				return new FatFolder(path, size);
 			}
-			catch (UnauthorizedAccessException)
+			catch (Exception)
 			{
 				return new FatFolder(path, 0);
 			}

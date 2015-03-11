@@ -39,9 +39,10 @@
 			this.CancelSearchButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.CancelSearchButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
 			this.CancelSearchButton.Enabled = false;
-			this.CancelSearchButton.Location = new System.Drawing.Point(472, 86);
+			this.CancelSearchButton.Location = new System.Drawing.Point(944, 165);
+			this.CancelSearchButton.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.CancelSearchButton.Name = "CancelSearchButton";
-			this.CancelSearchButton.Size = new System.Drawing.Size(110, 30);
+			this.CancelSearchButton.Size = new System.Drawing.Size(220, 58);
 			this.CancelSearchButton.TabIndex = 7;
 			this.CancelSearchButton.Text = "&Cancel";
 			this.CancelSearchButton.UseVisualStyleBackColor = true;
@@ -52,9 +53,10 @@
 			this.SearchProgressStatusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.SearchProgressStatusLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.SearchProgressStatusLabel.Location = new System.Drawing.Point(12, 55);
+			this.SearchProgressStatusLabel.Location = new System.Drawing.Point(24, 106);
+			this.SearchProgressStatusLabel.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
 			this.SearchProgressStatusLabel.Name = "SearchProgressStatusLabel";
-			this.SearchProgressStatusLabel.Size = new System.Drawing.Size(570, 18);
+			this.SearchProgressStatusLabel.Size = new System.Drawing.Size(1140, 35);
 			this.SearchProgressStatusLabel.TabIndex = 6;
 			this.SearchProgressStatusLabel.Text = "Ready";
 			this.SearchProgressStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -63,9 +65,10 @@
 			// 
 			this.SearchProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.SearchProgressBar.Location = new System.Drawing.Point(12, 23);
+			this.SearchProgressBar.Location = new System.Drawing.Point(24, 44);
+			this.SearchProgressBar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.SearchProgressBar.Name = "SearchProgressBar";
-			this.SearchProgressBar.Size = new System.Drawing.Size(570, 29);
+			this.SearchProgressBar.Size = new System.Drawing.Size(1140, 56);
 			this.SearchProgressBar.TabIndex = 5;
 			// 
 			// SearchWorker
@@ -78,21 +81,22 @@
 			// 
 			// ProcessingDialog
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.CancelButton = this.CancelSearchButton;
-			this.ClientSize = new System.Drawing.Size(594, 128);
+			this.ClientSize = new System.Drawing.Size(1188, 246);
 			this.ControlBox = false;
 			this.Controls.Add(this.CancelSearchButton);
 			this.Controls.Add(this.SearchProgressStatusLabel);
 			this.Controls.Add(this.SearchProgressBar);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
 			this.Name = "ProcessingDialog";
 			this.ShowIcon = false;
 			this.ShowInTaskbar = false;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Processing Fat Folders...";
+			this.Text = "Processing potentially Fat Folders...";
 			this.Shown += new System.EventHandler(this.ProcessingDialogShown);
 			this.ResumeLayout(false);
 

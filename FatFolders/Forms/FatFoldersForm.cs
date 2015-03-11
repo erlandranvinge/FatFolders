@@ -17,7 +17,8 @@ namespace FatFolders.Forms
 		private void FoldersListViewRetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)
 		{
 			var folder = _result[e.ItemIndex];
-			e.Item = new ListViewItem(new[] { folder.Path, Utils.FormatSize(folder.Size) });
+			if (folder != null)
+				e.Item = new ListViewItem(new[] { folder.Path, Utils.FormatSize(folder.Size) });
 		}
 
 		private void AddFoldersButtonClick(object sender, EventArgs e)

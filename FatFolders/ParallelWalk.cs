@@ -25,6 +25,7 @@ namespace FatFolders
 				Parallel.ForEach(subFolders, GetSubFolders);
 			}
 			catch (UnauthorizedAccessException) {}
+			catch (PathTooLongException) {}
 		}
 	}
 }
